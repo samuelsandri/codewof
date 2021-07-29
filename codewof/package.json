@@ -13,7 +13,8 @@
     "jquery": "3.4.1",
     "popper.js": "1.15.0",
     "skulpt": "0.11.1",
-    "sortablejs": "1.8.4"
+    "sortablejs": "1.8.4",
+    "blockly": "6.20210701.0"
   },
   "devDependencies": {
     "autoprefixer": "9.5.1",

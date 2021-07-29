@@ -1,3 +1,13 @@
 <div id="python-editor" class="border">
     <textarea id="code" class="hidden">{% if previous_attempt %}{{ previous_attempt.user_code }}{% elif question.QUESTION_TYPE == QUESTION_TYPE_DEBUGGING %}{{ question.initial_code }}{% endif %}</textarea>
+    <div id="blocklyDiv" style="height: 500px; width: 1078px;"></div>
+    <xml id="toolbox" style="display: none">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+      </xml>
 </div>

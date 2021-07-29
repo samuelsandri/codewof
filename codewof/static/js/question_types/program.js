@@ -2,12 +2,19 @@ var base = require('./base.js');
 var CodeMirror = require('codemirror');
 require('codemirror/mode/python/python.js');
 const introJS = require('intro.js');
+Blockly = require('blockly')
+Blockly.Python = require('blockly/python')
 
 var test_cases = {};
 
 $(document).ready(function () {
     $('#run_code').click(function () {
         run_code(editor, true);
+    });
+
+    var editor2 = Blockly.inject('blocklyDiv',
+      {
+          toolbox: document.getElementById('toolbox')
     });
 
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
