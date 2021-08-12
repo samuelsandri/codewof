@@ -4,6 +4,7 @@ require('codemirror/mode/python/python.js');
 const introJS = require('intro.js');
 Blockly = require('blockly')
 Blockly.Python = require('blockly/python')
+require('../blockly/blockly_blocks.js')
 
 var test_cases = {};
 
@@ -13,8 +14,16 @@ $(document).ready(function () {
     });
 
     var editor2 = Blockly.inject('blocklyDiv',
-      {
-          toolbox: document.getElementById('toolbox')
+    {
+        toolbox: document.getElementById('toolbox'),
+        grid:
+        {
+            spacing: 20,
+            length: 3,
+            colour: '#ccc',
+            snap: true
+        },
+        trashcan: true
     });
 
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
