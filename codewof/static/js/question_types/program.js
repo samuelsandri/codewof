@@ -13,9 +13,9 @@ $(document).ready(function () {
         run_code(editor, true);
     });
 
-    var editor2 = Blockly.inject('blocklyDiv',
+    var editor2 = Blockly.inject('blockly-code',
     {
-        toolbox: document.getElementById('toolbox'),
+        toolbox: document.getElementById('blockly-toolbox'),
         grid:
         {
             spacing: 20,
