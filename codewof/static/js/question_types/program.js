@@ -2,9 +2,18 @@ var base = require('./base.js');
 var CodeMirror = require('codemirror');
 require('codemirror/mode/python/python.js');
 const introJS = require('intro.js');
-Blockly = require('blockly')
-Blockly.Python = require('blockly/python')
-require('../blockly/blockly_blocks.js')
+var Blockly = require('blockly');
+Blockly.Python = require('blockly/python');
+
+var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
+<block type="text_print" x="37" y="63">
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">Hello from Blockly!</field>
+    </shadow>
+  </value>
+</block>
+</xml>`;
 
 var test_cases = {};
 
@@ -13,18 +22,24 @@ $(document).ready(function () {
         run_code(editor, true);
     });
 
-    var editor2 = Blockly.inject('blockly-code',
+    var blocklyWorkspace = Blockly.inject('blockly-code',
     {
         toolbox: document.getElementById('blockly-toolbox'),
-        grid:
-        {
-            spacing: 20,
-            length: 3,
-            colour: '#ccc',
-            snap: true
-        },
-        trashcan: true
     });
+
+    try {
+        var xml = Blockly.Xml.textToDom(xmlText);
+      
+        // Create workspace and import the XML
+        Blockly.Xml.domToWorkspace(xml, blocklyWorkspace);
+      
+        // Convert code and log output
+        var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
+        console.log(code);
+    }
+    catch (e) {
+        console.log(e);
+    }
 
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {
@@ -69,6 +84,8 @@ $(document).ready(function () {
             base.scroll_to_element(containerId, currentElement);
         });
     });
+
+    editor.getDoc().setValue(Blockly.Python.workspaceToCode(blocklyWorkspace));
 });
 
 function run_code(editor, submit) {
