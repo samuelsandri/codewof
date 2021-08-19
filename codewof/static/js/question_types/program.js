@@ -15,60 +15,60 @@ var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
 </block>
 </xml>`;
 
+var blocklyTheme = {
+    'blockStyles': {
+        'text_blocks': {
+            "colourPrimary": "#7dba68",
+            "colourSecondary":"#b3e0a4",
+            "colourTertiary":"#719166"
+        }
+    },
+    'categoryStyles': {
+        'string_category': {
+            'colour': '#7dba68'
+        }
+    },
+    'componentStyles': {
+        'toolboxBackgroundColour': '#4a4a4a',
+        'toolboxForegroundColour': '#FFFFFF'
+    }
+}
+
 var test_cases = {};
 
 $(document).ready(function () {
-    $('#run_code').click(function () {
-        run_code(editor, true);
-    });
+    // $('#run_code').click(function () {
+    //     run_code(editor, true);
+    // });
 
-    var blocklyWorkspace = Blockly.inject('blockly-code',
-    {
-        toolbox: document.getElementById('blockly-toolbox'),
-    });
-
-    try {
-        var xml = Blockly.Xml.textToDom(xmlText);
-      
-        // Create workspace and import the XML
-        Blockly.Xml.domToWorkspace(xml, blocklyWorkspace);
-      
-        // Convert code and log output
-        var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
-        console.log(code);
-    }
-    catch (e) {
-        console.log(e);
-    }
-
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: {
-            name: "python",
-            version: 3,
-            singleLineStringErrors: false
-        },
-        lineNumbers: true,
-        textWrapping: false,
-        styleActiveLine: true,
-        autofocus: true,
-        indentUnit: 4,
-        viewportMargin: Infinity,
-        // Replace tabs with 4 spaces. Taken from https://stackoverflow.com/questions/15183494/codemirror-tabs-to-spaces
-        extraKeys: {
-            "Tab": function(cm) {
-                cm.replaceSelection("    ", "end");
-            }
-        }
-    });
+    // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    //     mode: {
+    //         name: "python",
+    //         version: 3,
+    //         singleLineStringErrors: false
+    //     },
+    //     lineNumbers: true,
+    //     textWrapping: false,
+    //     styleActiveLine: true,
+    //     autofocus: true,
+    //     indentUnit: 4,
+    //     viewportMargin: Infinity,
+    //     // Replace tabs with 4 spaces. Taken from https://stackoverflow.com/questions/15183494/codemirror-tabs-to-spaces
+    //     extraKeys: {
+    //         "Tab": function(cm) {
+    //             cm.replaceSelection("    ", "end");
+    //         }
+    //     }
+    // });
 
     for (let i = 0; i < test_cases_list.length; i++) {
         data = test_cases_list[i];
         test_cases[data.id] = data
     }
 
-    if (editor.getValue()) {
-        run_code(editor, false)
-    }
+    // if (editor.getValue()) {
+    //     run_code(editor, false)
+    // }
 
     setTutorialAttributes();
     $("#introjs-tutorial").click(function() {
@@ -85,8 +85,67 @@ $(document).ready(function () {
         });
     });
 
-    editor.getDoc().setValue(Blockly.Python.workspaceToCode(blocklyWorkspace));
+    // editor.getDoc().setValue(Blockly.Python.workspaceToCode(blocklyWorkspace));
+    setup_blockly();
 });
+
+function setup_blockly() {
+    var blocklyWorkspace = Blockly.inject('blockly-code',
+    {
+        toolbox: document.getElementById('blockly-toolbox'),
+        theme: blocklyTheme
+    });
+
+    try {
+        var xml = Blockly.Xml.textToDom(xmlText);
+      
+        // Create workspace and import the XML
+        Blockly.Xml.domToWorkspace(xml, blocklyWorkspace);
+      
+        // Convert code and log output
+        var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
+        console.log(code);
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+    $('#run_code').click(function () {
+        run_blockly_code(blocklyWorkspace, true);
+    });
+}
+
+function run_blockly_code(blocklyWorkspace, submit) {
+    base.clear_submission_feedback();
+    for (var id in test_cases) {
+        if (test_cases.hasOwnProperty(id)) {
+            var test_case = test_cases[id];
+            test_case.received_output = '';
+            test_case.passed = false;
+            test_case.runtime_error = false;
+            test_case.test_input_list = test_case.test_input.split('\n')
+        }
+    }
+    var user_code = Blockly.Python.workspaceToCode(blocklyWorkspace);
+    if (user_code.includes("\t")) {
+        // contains tabs
+        $("#indentation-warning").removeClass("d-none");
+        return; // do not run tests
+    } else {
+        $("#indentation-warning").addClass("d-none");
+    }
+    test_cases = base.run_test_cases(test_cases, user_code, run_python_code);
+    if (submit) {
+        base.ajax_request(
+            'save_question_attempt',
+            {
+                user_input: user_code,
+                question: question_id,
+                test_cases: test_cases,
+            }
+        );
+    }
+}
 
 function run_code(editor, submit) {
     base.clear_submission_feedback();

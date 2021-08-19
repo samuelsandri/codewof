@@ -1,6 +1,19 @@
 <div id="block-python-editor" class="border">
-    <div id="blockly-code" style="height: 480px; width: 600px;"></div>
-    <xml id="blockly-toolbox" style="display:none">
+    <xml id="blockly-toolbox" style="display: none;">
+      <category name="Text" categorystyle="string_category">
+        <block type="text"></block>
+        <block type="text_join"></block>
+        <block type="text_print">
+          <value name="TEXT">
+            <shadow type="text">
+              <field name="TEXT">abc</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
+    </xml>
+    <div id="blockly-code" style="height: 500px; width: 1078px;"></div>
+    <!-- <xml id="blockly-toolbox" style="display:none">
       <category name="Logic" colour="%{BKY_LOGIC_HUE}">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>
@@ -309,6 +322,6 @@
       <sep></sep>
       <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
       <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
-    </xml>
-    <textarea id="code" class="hidden">{% if previous_attempt %}{{ previous_attempt.user_code }}{% elif question.QUESTION_TYPE == QUESTION_TYPE_DEBUGGING %}{{ question.initial_code }}{% endif %}</textarea>
+    </xml> -->
+    <!-- <textarea id="code" class="hidden">{% if previous_attempt %}{{ previous_attempt.user_code }}{% elif question.QUESTION_TYPE == QUESTION_TYPE_DEBUGGING %}{{ question.initial_code }}{% endif %}</textarea> -->
 </div>
