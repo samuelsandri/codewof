@@ -46,6 +46,9 @@
     &.qc-debugging {
         @include question-card-colour-variant($question-type-debugging);
     }
+    &.qc-blockly {
+        @include question-card-colour-variant($question-type-blockly);
+    }
 }
 
 .qc-checkbox {

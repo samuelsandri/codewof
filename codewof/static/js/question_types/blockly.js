@@ -1,42 +1,44 @@
 var base = require('./base.js');
-var CodeMirror = require('codemirror');
-require('codemirror/mode/python/python.js');
 const introJS = require('intro.js');
+var Blockly = require('blockly');
+Blockly.Python = require('blockly/python');
+
+var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
+<block type="text_print" x="37" y="63">
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">Hello from Blockly!</field>
+    </shadow>
+  </value>
+</block>
+</xml>`;
+
+var blocklyTheme = {
+    'blockStyles': {
+        'text_blocks': {
+            "colourPrimary": "#7dba68",
+            "colourSecondary":"#b3e0a4",
+            "colourTertiary":"#719166"
+        }
+    },
+    'categoryStyles': {
+        'string_category': {
+            'colour': '#7dba68'
+        }
+    },
+    'componentStyles': {
+        'toolboxBackgroundColour': '#4a4a4a',
+        'toolboxForegroundColour': '#FFFFFF'
+    }
+}
 
 var test_cases = {};
 
 $(document).ready(function () {
-    $('#run_code').click(function () {
-        run_code(editor, true);
-    });
-
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: {
-            name: "python",
-            version: 3,
-            singleLineStringErrors: false
-        },
-        lineNumbers: true,
-        textWrapping: false,
-        styleActiveLine: true,
-        autofocus: true,
-        indentUnit: 4,
-        viewportMargin: Infinity,
-        // Replace tabs with 4 spaces. Taken from https://stackoverflow.com/questions/15183494/codemirror-tabs-to-spaces
-        extraKeys: {
-            "Tab": function(cm) {
-                cm.replaceSelection("    ", "end");
-            }
-        }
-    });
 
     for (let i = 0; i < test_cases_list.length; i++) {
         data = test_cases_list[i];
         test_cases[data.id] = data
-    }
-
-    if (editor.getValue()) {
-        run_code(editor, false)
     }
 
     setTutorialAttributes();
@@ -53,9 +55,37 @@ $(document).ready(function () {
             base.scroll_to_element(containerId, currentElement);
         });
     });
+
+    setup_blockly();
 });
 
-function run_code(editor, submit) {
+function setup_blockly() {
+    var blocklyWorkspace = Blockly.inject('blockly-code',
+    {
+        toolbox: document.getElementById('blockly-toolbox'),
+        theme: blocklyTheme
+    });
+
+    try {
+        var xml = Blockly.Xml.textToDom(xmlText);
+      
+        // Create workspace and import the XML
+        //Blockly.Xml.domToWorkspace(xml, blocklyWorkspace);
+      
+        // Convert code and log output
+        var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
+        console.log(code);
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+    $('#run_code').click(function () {
+        run_blockly_code(blocklyWorkspace, true);
+    });
+}
+
+function run_blockly_code(blocklyWorkspace, submit) {
     base.clear_submission_feedback();
     for (var id in test_cases) {
         if (test_cases.hasOwnProperty(id)) {
@@ -66,7 +96,7 @@ function run_code(editor, submit) {
             test_case.test_input_list = test_case.test_input.split('\n')
         }
     }
-    var user_code = editor.getValue();
+    var user_code = Blockly.Python.workspaceToCode(blocklyWorkspace);
     if (user_code.includes("\t")) {
         // contains tabs
         $("#indentation-warning").removeClass("d-none");
@@ -86,7 +116,6 @@ function run_code(editor, submit) {
         );
     }
 }
-
 
 function run_python_code(user_code, test_case) {
     // Configure Skulpt for running Python code
@@ -128,7 +157,6 @@ function run_python_code(user_code, test_case) {
         test_case.runtime_error = true;
     }
 }
-
 
 function setTutorialAttributes() {
     $(".question-text").attr(

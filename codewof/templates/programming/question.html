@@ -25,6 +25,9 @@
     <div class="col-12">
         {% if question.QUESTION_TYPE == QUESTION_TYPE_PARSONS %}
             {% include "programming/question_components/editor-parsons.html" %}
+        {% elif question.QUESTION_TYPE == QUESTION_TYPE_BLOCKLY %}
+            {% include "programming/question_components/editor-block-python.html" %}
+            <div class="mb-3"></div>
         {% else %}
             {% if question.QUESTION_TYPE == QUESTION_TYPE_DEBUGGING %}
                 {% if question.read_only_lines_top or question.read_only_lines_bottom %}
@@ -33,7 +36,7 @@
                     </div>
                 {% endif %}
             {% endif %}
-            {% include "programming/question_components/editor-block-python.html" %}
+            {% include "programming/question_components/editor-python.html" %}
             <div class="mb-3">
                 <small class="text-muted font-italic mb-3">The tab button is configured to add 4 spaces.</small>
             </div>

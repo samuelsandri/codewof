@@ -9,6 +9,7 @@ from programming.models import (
     QuestionTypeFunction,
     QuestionTypeParsons,
     QuestionTypeDebugging,
+    QuestionTypeBlockly,
     Profile,
     Achievement,
     Earned,
@@ -79,6 +80,7 @@ admin.site.register(QuestionTypeProgram)
 admin.site.register(QuestionTypeFunction)
 admin.site.register(QuestionTypeParsons)
 admin.site.register(QuestionTypeDebugging)
+admin.site.register(QuestionTypeBlockly)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Achievement, AchievementAdmin)
 admin.site.register(Earned, EarnedAdmin)

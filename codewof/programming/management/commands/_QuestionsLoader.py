@@ -17,6 +17,8 @@ from programming.models import (
     QuestionTypeParsonsTestCase,
     QuestionTypeDebugging,
     QuestionTypeDebuggingTestCase,
+    QuestionTypeBlockly,
+    QuestionTypeBlocklyTestCase,
 )
 
 VALID_QUESTION_TYPES = {
@@ -36,10 +38,17 @@ VALID_QUESTION_TYPES = {
         'question_class': QuestionTypeDebugging,
         'test_case_class': QuestionTypeDebuggingTestCase,
     },
+    QuestionTypeBlockly.QUESTION_TYPE: {
+        'question_class': QuestionTypeBlockly,
+        'test_case_class': QuestionTypeBlocklyTestCase,
+    },
 }
 VALID_QUESTION_TYPE_SETS = [
     {
         QuestionTypeFunction.QUESTION_TYPE, QuestionTypeParsons.QUESTION_TYPE
+    },
+    {
+        QuestionTypeProgram.QUESTION_TYPE, QuestionTypeBlockly.QUESTION_TYPE
     },
 ]
 TEST_CASE_FILE_TEMPLATE = 'test-case-{id}-{type}.txt'
@@ -155,7 +164,7 @@ class QuestionsLoader(TranslatableModelLoader):
                 for (test_case_id, test_case_type) in question_test_cases.items():
                     test_case_translations = self.get_blank_translation_dictionary()
 
-                    if question_class == QuestionTypeProgram:
+                    if question_class in (QuestionTypeProgram, QuestionTypeBlockly):
                         test_case_input_filename = join(
                             question_slug,
                             TEST_CASE_FILE_TEMPLATE.format(id=test_case_id, type='input')
@@ -190,7 +199,7 @@ class QuestionsLoader(TranslatableModelLoader):
                         defaults={},
                     )
 
-                    if test_case_class == QuestionTypeProgramTestCase:
+                    if test_case_class in (QuestionTypeProgramTestCase, QuestionTypeBlocklyTestCase):
                         required_fields = ['test_input', 'expected_output']
                     elif test_case_class in (
                         QuestionTypeFunctionTestCase,

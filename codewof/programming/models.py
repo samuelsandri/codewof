@@ -314,6 +314,34 @@ class QuestionTypeDebuggingTestCase(TestCase):
 
         verbose_name = 'Debugging Problem Question Test Case'
 
+# ----- Blockly question ------------------------------------------------------
+
+class QuestionTypeBlockly(Question):
+    """A blockly based question."""
+
+    QUESTION_TYPE = 'blockly'
+
+    class Meta:
+        """Meta information for class."""
+
+        verbose_name = 'Blockly Question'
+        verbose_name_plural = 'Blockly Questions'
+
+
+class QuestionTypeBlocklyTestCase(TestCase):
+    """A test case for a blockly based question."""
+
+    test_input = models.CharField(max_length=LARGE, blank=True)
+    question = models.ForeignKey(
+        QuestionTypeBlockly,
+        related_name='test_cases',
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        """Meta information for class."""
+
+        verbose_name = 'Blockly Question Test Case'
 
 # class Skill(models.Model):
 #     name = models.CharField(max_length=SMALL)
