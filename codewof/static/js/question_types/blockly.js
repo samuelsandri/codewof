@@ -17,17 +17,26 @@ var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
 var blocklyTheme = {
     'blockStyles': {
         'text_blocks': {
-            "colourPrimary": "#7dba68",
-            "colourSecondary":"#b3e0a4",
-            "colourTertiary":"#719166"
+            "colourPrimary": "#F89621",
+            "colourSecondary":"#F89621",
+            "colourTertiary":"#F89621"
         }
     },
     'categoryStyles': {
-        'string_category': {
-            'colour': '#7dba68'
+        'variables_category': {
+            'colour': '#2f64e0'
         },
         'statements_category': {
             'colour': '#F89621'
+        },
+        'operators_category': {
+            'colour': '#e667a4'
+        },
+        'logic_category': {
+            'colour': '#7dba68'
+        },
+        'loops_category': {
+            'colour': '#9220d4'
         }
     },
     'componentStyles': {

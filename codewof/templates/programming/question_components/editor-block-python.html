@@ -1,12 +1,31 @@
 <div id="block-python-editor" class="border">
     <xml id="blockly-toolbox" style="display: none;">
-      <category name="Text" categorystyle="string_category">
-        <block type="text_print"></block>
-        <block type="text"></block>
-        <block type="text_join"></block>
+      <category name="Variables" categorystyle="variables_category">
+        <block type="variables_set"></block>
+        <block type="variables_get"></block>
       </category>
       <category name="Statements" categorystyle="statements_category">
+        <block type="print"></block>
         <block type="input"></block>
+        <block type="new_text"></block>
+        <block type="cast_int"></block>
+        <block type="cast_str"></block>
+      </category>
+      <category name="Operators" categorystyle="operators_category">
+        <block type="add_operator"></block>
+        <block type="math_operators"></block>
+      </category>
+      <category name="Logic" categorystyle="logic_category">
+        <block type="logic_if"></block>
+        <block type="logic_elif"></block>
+        <block type="logic_else"></block>
+        <block type="comparison_operator"></block>
+        <block type="logic_operator"></block>
+        <block type="not_operator"></block>
+      </category>
+      <category name="Loops" categorystyle="loops_category">
+        <block type="for_loop"></block>
+        <block type="while_loop"></block>
       </category>
     </xml>
     <div id="blockly-code" style="height: 500px; width: 1078px;"></div>
