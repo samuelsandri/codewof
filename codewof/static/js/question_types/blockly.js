@@ -2,6 +2,7 @@ var base = require('./base.js');
 const introJS = require('intro.js');
 var Blockly = require('blockly');
 Blockly.Python = require('blockly/python');
+require('../blockly/blockly_blocks').define_blocks(Blockly);
 
 var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
 <block type="text_print" x="37" y="63">
@@ -24,6 +25,9 @@ var blocklyTheme = {
     'categoryStyles': {
         'string_category': {
             'colour': '#7dba68'
+        },
+        'statements_category': {
+            'colour': '#F89621'
         }
     },
     'componentStyles': {
