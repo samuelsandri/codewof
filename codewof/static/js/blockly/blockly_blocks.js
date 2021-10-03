@@ -72,7 +72,6 @@ function define_blocks(Blockly) {
     Blockly.Python['new_text'] = function(block) {
         var text_text = block.getFieldValue('text');
         var code = `"${text_text}"`;
-        console.log(code);
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
 
