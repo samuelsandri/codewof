@@ -23,8 +23,7 @@ function define_blocks(Blockly) {
           this.setPreviousStatement(true, null);
           this.setNextStatement(true, null);
           this.setColour(statementsColor);
-          this.setTooltip('Use this to print a variable.');
-          this.setHelpUrl('');
+          this.setTooltip('Prints a variable');
         },
     };
 
@@ -46,8 +45,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(statementsColor);
-            this.setTooltip("");
-            this.setHelpUrl("");
+            this.setTooltip("Get a string input");
         }
     }
     
@@ -72,7 +70,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(statementsColor);
             this.setTooltip('Counts the occurences of a value');
-            this.setHelpUrl('');
         },
     };
 
@@ -95,8 +92,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(statementsColor);
-            this.setTooltip('Calculates the length of the value');
-            this.setHelpUrl('');
+            this.setTooltip('Calculates the length of an object');
         },
     };
 
@@ -120,8 +116,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setColour(stringsColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setTooltip("Text input for inline input");
-            this.setHelpUrl("");
+            this.setTooltip("A string value");
         }
     };
 
@@ -143,8 +138,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(stringsColor);
-            this.setTooltip('Changes to an str');
-            this.setHelpUrl('');
+            this.setTooltip('Casts the value to a string');
         },
     };
 
@@ -166,6 +160,7 @@ function define_blocks(Blockly) {
           this.setOutput(true, null);
           this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
           this.setColour(stringsColor);
+          this.setTooltip('Concatenate two strings together');
         }
     };
 
@@ -191,7 +186,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(stringsColor);
             this.setTooltip('Checks if a string starts with the given value');
-            this.setHelpUrl('');
         },
     };
 
@@ -213,7 +207,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(stringsColor);
             this.setTooltip('Makes a string lowercase');
-            this.setHelpUrl('');
         },
     };
 
@@ -234,7 +227,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(stringsColor);
             this.setTooltip('Makes a string uppercase');
-            this.setHelpUrl('');
         },
     };
 
@@ -255,7 +247,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(stringsColor);
             this.setTooltip('Makes a string title case');
-            this.setHelpUrl('');
         },
     };
 
@@ -275,8 +266,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setColour(numbersColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setTooltip("Number input for inline input");
-            this.setHelpUrl("");
+            this.setTooltip("An integer value");
         }
     };
 
@@ -297,8 +287,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setColour(numbersColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setTooltip("Create a new floating point number");
-            this.setHelpUrl("");
+            this.setTooltip("A floating point value");
         }
     };
 
@@ -321,8 +310,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(numbersColor);
-            this.setTooltip('Changes to an int');
-            this.setHelpUrl('');
+            this.setTooltip('Cast the value to an integer');
         },
     };
 
@@ -345,7 +333,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(numbersColor);
             this.setTooltip('Casts the value to a float');
-            this.setHelpUrl('');
         },
     };
 
@@ -367,8 +354,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(numbersColor);
-            this.setTooltip("");
-            this.setHelpUrl("");
+            this.setTooltip("Perform a mathematical operation on two values");
         }
     };
 
@@ -395,8 +381,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(loopsColor);
-            this.setTooltip('');
-            this.setHelpUrl('');
+            this.setTooltip('Start a while loop for the condition');
         }
     };
 
@@ -425,8 +410,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(loopsColor);
-            this.setTooltip('');
-            this.setHelpUrl('');
+            this.setTooltip('Create a for loop for the condition');
         }
     }
 
@@ -448,8 +432,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(variablesColor);
-            this.setTooltip("");
-            this.setHelpUrl("");
+            this.setTooltip("Use a variable");
         }
     };
 
@@ -470,8 +453,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(variablesColor);
-            this.setTooltip("assign a value, increment, or decrement a variable");
-            this.setHelpUrl("");
+            this.setTooltip("Assign a value to a variable (or increment/decrement the variable)");
         }
     };
 
@@ -493,8 +475,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setColour(logicColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setTooltip("Boolean input for inline input");
-            this.setHelpUrl("");
+            this.setTooltip("A boolean value");
         }
     };
 
@@ -517,8 +498,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(logicColor);
-            this.setTooltip('If block with inline input');
-            this.setHelpUrl('');
+            this.setTooltip('An if statement');
         },
     };
 
@@ -544,8 +524,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(logicColor);
-            this.setTooltip('ElIf block with inline input');
-            this.setHelpUrl('');
+            this.setTooltip('An elif statement');
         },
     };
 
@@ -566,8 +545,7 @@ function define_blocks(Blockly) {
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
             this.setColour(logicColor);
-            this.setTooltip('Else statement');
-            this.setHelpUrl('');
+            this.setTooltip('An else statement');
         },
     };
 
@@ -598,8 +576,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(logicColor);
-            this.setTooltip("");
-            this.setHelpUrl("");
+            this.setTooltip("Perform a logical comparison on two value");
         }
     };
 
@@ -623,8 +600,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(logicColor);
-            this.setTooltip("");
-            this.setHelpUrl("");
+            this.setTooltip("A logical operator (and/or) between two conditions");
         }
     };
 
@@ -640,8 +616,7 @@ function define_blocks(Blockly) {
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(logicColor);
-            this.setTooltip('negates a Boolean value');
-            this.setHelpUrl('');
+            this.setTooltip('A logical not operator');
         },
     };
 
@@ -666,7 +641,6 @@ function define_blocks(Blockly) {
             this.setColour(listsColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setTooltip("Create a new list from comma separated values");
-            this.setHelpUrl("");
         }
     };
 
@@ -691,7 +665,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(listsColor);
             this.setTooltip('Retrieve list element using index');
-            this.setHelpUrl('');
         },
     };
 
@@ -715,7 +688,6 @@ function define_blocks(Blockly) {
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setColour(listsColor);
             this.setTooltip('Checks if a variable is in a list');
-            this.setHelpUrl('');
         },
     };
 
