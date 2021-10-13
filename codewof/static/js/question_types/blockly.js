@@ -4,24 +4,7 @@ var Blockly = require('blockly');
 Blockly.Python = require('blockly/python');
 require('../blockly/blockly_blocks').define_blocks(Blockly);
 
-var xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
-<block type="text_print" x="37" y="63">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">Hello from Blockly!</field>
-    </shadow>
-  </value>
-</block>
-</xml>`;
-
 var blocklyTheme = {
-    'blockStyles': {
-        'text_blocks': {
-            "colourPrimary": "#F89621",
-            "colourSecondary":"#F89621",
-            "colourTertiary":"#F89621"
-        }
-    },
     'categoryStyles': {
         'variables_category': {
             'colour': '#3d7fff'
@@ -85,26 +68,13 @@ function setup_blockly() {
         theme: blocklyTheme
     });
 
-    try {
-        var xml = Blockly.Xml.textToDom(xmlText);
-      
-        // Create workspace and import the XML
-        //Blockly.Xml.domToWorkspace(xml, blocklyWorkspace);
-      
-        // Convert code and log output
-        var code = Blockly.Python.workspaceToCode(blocklyWorkspace);
-        console.log(code);
-    }
-    catch (e) {
-        console.log(e);
-    }
-
     $('#run_code').click(function () {
         run_blockly_code(blocklyWorkspace, true);
     });
 }
 
 function run_blockly_code(blocklyWorkspace, submit) {
+
     base.clear_submission_feedback();
     for (var id in test_cases) {
         if (test_cases.hasOwnProperty(id)) {
@@ -115,14 +85,9 @@ function run_blockly_code(blocklyWorkspace, submit) {
             test_case.test_input_list = test_case.test_input.split('\n')
         }
     }
+
     var user_code = Blockly.Python.workspaceToCode(blocklyWorkspace);
-    if (user_code.includes("\t")) {
-        // contains tabs
-        $("#indentation-warning").removeClass("d-none");
-        return; // do not run tests
-    } else {
-        $("#indentation-warning").addClass("d-none");
-    }
+    
     test_cases = base.run_test_cases(test_cases, user_code, run_python_code);
     if (submit) {
         base.ajax_request(
