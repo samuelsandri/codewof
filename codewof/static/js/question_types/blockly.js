@@ -24,19 +24,25 @@ var blocklyTheme = {
     },
     'categoryStyles': {
         'variables_category': {
-            'colour': '#2f64e0'
+            'colour': '#3d7fff'
         },
         'statements_category': {
-            'colour': '#F89621'
-        },
-        'operators_category': {
-            'colour': '#e667a4'
-        },
-        'logic_category': {
             'colour': '#7dba68'
         },
+        'strings_category': {
+            'colour': '#d6544d'
+        },
+        'numbers_category': {
+            'colour': '#f89621'
+        },
+        'logic_category': {
+            'colour': '#e065d2'
+        },
         'loops_category': {
-            'colour': '#9220d4'
+            'colour': '#7e6bcf'
+        },
+        'lists_category': {
+            'colour': '#75acd1'
         }
     },
     'componentStyles': {

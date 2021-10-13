@@ -59,7 +59,7 @@
     </div>
 
     <div class="col-12">
-        {% if question.QUESTION_TYPE == QUESTION_TYPE_PROGRAM %}
+        {% if question.QUESTION_TYPE == QUESTION_TYPE_PROGRAM or question.QUESTION_TYPE == QUESTION_TYPE_BLOCKLY %}
             {% include "programming/question_components/test-case-programs-table.html" %}
         {% else %}
             {% include "programming/question_components/test-case-functions-table.html" %}

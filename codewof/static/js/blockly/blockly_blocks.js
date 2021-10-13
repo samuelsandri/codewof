@@ -2,11 +2,13 @@ function define_blocks(Blockly) {
 
     // Colors
 
-    const statementsColor = "#F89621";
-    const operatorsColor = "#e667a4";
-    const loopsColor = "#9220d4";
-    const variablesColor = "#2f64e0";
-    const logicColor = "#7dba68";
+    const statementsColor = "#7dba68";
+    const stringsColor = "#d6544d";
+    const numbersColor = "#f89621";
+    const loopsColor = "#7e6bcf";
+    const variablesColor = "#3d7fff";
+    const logicColor = "#e065d2";
+    const listsColor = "#75acd1";
 
     // Statements
 
@@ -35,9 +37,11 @@ function define_blocks(Blockly) {
     Blockly.Blocks['input'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("input(");
+                .appendField("input(\"");
             this.appendDummyInput()
-                .appendField(")");
+                .appendField(new Blockly.FieldTextInput(""), "text");
+            this.appendDummyInput()
+                .appendField("\")");
             this.setInputsInline(true);
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
@@ -48,9 +52,61 @@ function define_blocks(Blockly) {
     }
     
     Blockly.Python['input'] = function (block) {
-        var code = 'input("")';
+        var text_text = block.getFieldValue('text');
+        var code = `input("${text_text}")`;
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
+
+    Blockly.Blocks['count'] = {
+        init: function () {
+            this.appendValueInput("list")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField('.count(');
+            this.appendValueInput("var")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(')');
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(statementsColor);
+            this.setTooltip('Counts the occurences of a value');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['count'] = function (block) {
+        var list_value = Blockly.Python.valueToCode(block, 'list', Blockly.Python.ORDER_ATOMIC);
+        var var_value = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
+        const code = `${list_value}.count(${var_value})`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['length'] = {
+        init: function () {
+            this.appendDummyInput()
+                .appendField('len(');
+            this.appendValueInput("var")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(')');
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(statementsColor);
+            this.setTooltip('Calculates the length of the value');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['length'] = function (block) {
+        var var_value = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
+        const code = `len(${var_value})`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    // Strings
 
     Blockly.Blocks['new_text'] = {
         init: function() {
@@ -62,7 +118,7 @@ function define_blocks(Blockly) {
                 .appendField('"');
             this.setInputsInline(true);
             this.setOutput(true, null);
-            this.setColour(statementsColor);
+            this.setColour(stringsColor);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setTooltip("Text input for inline input");
             this.setHelpUrl("");
@@ -72,29 +128,6 @@ function define_blocks(Blockly) {
     Blockly.Python['new_text'] = function(block) {
         var text_text = block.getFieldValue('text');
         var code = `"${text_text}"`;
-        return [code, Blockly.Python.ORDER_ATOMIC];
-    };
-
-    Blockly.Blocks['cast_int'] = {
-        init: function () {
-            this.appendDummyInput()
-                .appendField('int(');
-            this.appendValueInput("bool")
-                .setCheck(null);
-            this.appendDummyInput()
-                .appendField(")")
-            this.setInputsInline(true);
-            this.setOutput(true, null);
-            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setColour(statementsColor);
-            this.setTooltip('Changes to an int');
-            this.setHelpUrl('');
-        },
-    };
-
-    Blockly.Python['cast_int'] = function (block) {
-        var value_bool = Blockly.Python.valueToCode(block, 'bool', Blockly.Python.ORDER_ATOMIC);
-        const code = 'int(' +  value_bool+ ')';
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
 
@@ -109,7 +142,7 @@ function define_blocks(Blockly) {
             this.setInputsInline(true);
             this.setOutput(true, null);
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-            this.setColour(statementsColor);
+            this.setColour(stringsColor);
             this.setTooltip('Changes to an str');
             this.setHelpUrl('');
         },
@@ -120,8 +153,6 @@ function define_blocks(Blockly) {
         const code = 'str(' +  value_bool+ ')';
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
-
-    // Operators
 
     Blockly.Blocks['add_operator'] = {
         init: function() {
@@ -134,7 +165,7 @@ function define_blocks(Blockly) {
           this.setInputsInline(true);
           this.setOutput(true, null);
           this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-          this.setColour(operatorsColor);
+          this.setColour(stringsColor);
         }
     };
 
@@ -145,20 +176,199 @@ function define_blocks(Blockly) {
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
 
+    Blockly.Blocks['starts_with'] = {
+        init: function () {
+            this.appendValueInput("string")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(".startswith(");
+            this.appendValueInput("test_str")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(")");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(stringsColor);
+            this.setTooltip('Checks if a string starts with the given value');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['starts_with'] = function (block) {
+        var value_string = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
+        var value_test_str = Blockly.Python.valueToCode(block, 'test_str', Blockly.Python.ORDER_ATOMIC);
+        const code = `${value_string}.startswith(${value_test_str})`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['string_lower'] = {
+        init: function () {
+            this.appendValueInput("string")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(".lower()");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(stringsColor);
+            this.setTooltip('Makes a string lowercase');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['string_lower'] = function (block) {
+        var value_string = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
+        const code = `${value_string}.lower()`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['string_upper'] = {
+        init: function () {
+            this.appendValueInput("string")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(".upper()");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(stringsColor);
+            this.setTooltip('Makes a string uppercase');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['string_upper'] = function (block) {
+        var value_string = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
+        const code = `${value_string}.upper()`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['string_title'] = {
+        init: function () {
+            this.appendValueInput("string")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(".title()");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(stringsColor);
+            this.setTooltip('Makes a string title case');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['string_title'] = function (block) {
+        var value_string = Blockly.Python.valueToCode(block, 'string', Blockly.Python.ORDER_ATOMIC);
+        const code = `${value_string}.title()`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    // Numbers
+
+    Blockly.Blocks['new_int'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldTextInput(""), "number");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setColour(numbersColor);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setTooltip("Number input for inline input");
+            this.setHelpUrl("");
+        }
+    };
+
+    Blockly.Python['new_int'] = function(block) {
+        var code = block.getFieldValue('number');
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['new_float'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldTextInput(""), "number");
+            this.appendDummyInput()
+                .appendField(".")
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldTextInput(""), "decimal");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setColour(numbersColor);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setTooltip("Create a new floating point number");
+            this.setHelpUrl("");
+        }
+    };
+
+    Blockly.Python['new_float'] = function(block) {
+        var number = block.getFieldValue('number');
+        var decimal = block.getFieldValue('decimal');
+        var code = `${number}.${decimal}`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['cast_int'] = {
+        init: function () {
+            this.appendDummyInput()
+                .appendField('int(');
+            this.appendValueInput("bool")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(")")
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(numbersColor);
+            this.setTooltip('Changes to an int');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['cast_int'] = function (block) {
+        var value_bool = Blockly.Python.valueToCode(block, 'bool', Blockly.Python.ORDER_ATOMIC);
+        const code = 'int(' +  value_bool+ ')';
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['cast_float'] = {
+        init: function () {
+            this.appendDummyInput()
+                .appendField('float(');
+            this.appendValueInput("var")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(")")
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(numbersColor);
+            this.setTooltip('Casts the value to a float');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['cast_float'] = function (block) {
+        var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
+        const code = `float(${value_var})`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
     Blockly.Blocks['math_operators'] = {
         init: function() {
-          this.appendValueInput("first")
-              .setCheck(null);
-          this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([["+","+"], ["-","-"], ["/","/"], ["%","%"], ["*","*"]]), "operators");
-          this.appendValueInput("last")
-              .setCheck(null);
-          this.setInputsInline(true);
-          this.setOutput(true, null);
-          this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-          this.setColour(operatorsColor);
-          this.setTooltip("");
-          this.setHelpUrl("");
+            this.appendValueInput("first")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldDropdown([["+","+"], ["-","-"], ["/","/"], ["%","%"], ["*","*"]]), "operators");
+            this.appendValueInput("last")
+                .setCheck(null);
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(numbersColor);
+            this.setTooltip("");
+            this.setHelpUrl("");
         }
     };
 
@@ -274,6 +484,24 @@ function define_blocks(Blockly) {
     };
 
     // Logic
+
+    Blockly.Blocks['new_bool'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldDropdown([["True","True"], ["False","False"]]), "boolean");
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setColour(logicColor);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setTooltip("Boolean input for inline input");
+            this.setHelpUrl("");
+        }
+    };
+
+    Blockly.Python['new_bool'] = function(block) {
+        var code = block.getFieldValue('boolean');
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
 
     Blockly.Blocks['logic_if'] = {
         init: function () {
@@ -420,6 +648,81 @@ function define_blocks(Blockly) {
     Blockly.Python['not_operator'] = function (block) {
         var value_bool = Blockly.Python.valueToCode(block, 'bool', Blockly.Python.ORDER_ATOMIC);
         const code = 'not ' +  value_bool;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    // Lists
+
+    Blockly.Blocks['new_list'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField('[');
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldTextInput(""), "items");
+            this.appendDummyInput()
+                .appendField(']');
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setColour(listsColor);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setTooltip("Create a new list from comma separated values");
+            this.setHelpUrl("");
+        }
+    };
+
+    Blockly.Python['new_list'] = function(block) {
+        var items = block.getFieldValue('items');
+        var code = `[${items}]`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['idx_list'] = {
+        init: function () {
+            this.appendValueInput("list")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField('[');
+            this.appendValueInput("index")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField(']');
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(listsColor);
+            this.setTooltip('Retrieve list element using index');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['idx_list'] = function (block) {
+        var list_value = Blockly.Python.valueToCode(block, 'list', Blockly.Python.ORDER_ATOMIC);
+        var index_value = Blockly.Python.valueToCode(block, 'index', Blockly.Python.ORDER_ATOMIC);
+        const code = `${list_value}[${index_value}]`;
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    };
+
+    Blockly.Blocks['in_list'] = {
+        init: function () {
+            this.appendValueInput("var")
+                .setCheck(null);
+            this.appendDummyInput()
+                .appendField('in');
+            this.appendValueInput("list")
+                .setCheck(null);
+            this.setInputsInline(true);
+            this.setOutput(true, null);
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setColour(listsColor);
+            this.setTooltip('Checks if a variable is in a list');
+            this.setHelpUrl('');
+        },
+    };
+
+    Blockly.Python['in_list'] = function (block) {
+        var var_value = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
+        var list_value = Blockly.Python.valueToCode(block, 'list', Blockly.Python.ORDER_ATOMIC);
+        const code = `${var_value} in ${list_value}`;
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
 }
