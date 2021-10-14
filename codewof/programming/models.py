@@ -338,6 +338,7 @@ class QuestionTypeDebuggingTestCase(TestCase):
 
         verbose_name = 'Debugging Problem Question Test Case'
 
+
 # ----- Blockly question ------------------------------------------------------
 
 class QuestionTypeBlockly(Question):
