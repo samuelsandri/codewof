@@ -6,7 +6,6 @@ from django.views import generic
 from django.db.models import Count, Max
 from django.db.models.functions import Coalesce
 from django.http import JsonResponse, Http404, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_http_methods
 from rest_framework import viewsets

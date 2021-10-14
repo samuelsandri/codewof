@@ -34,9 +34,9 @@ class QuestionListViewTest(TestCase):
         self.assertTrue(login)
 
     # tests begin
-    def test_redirect_if_not_logged_in(self):
-        resp = self.client.get('/questions/')
-        self.assertRedirects(resp, '/accounts/login/?next=/questions/')
+    # def test_redirect_if_not_logged_in(self):
+    #     resp = self.client.get('/questions/')
+    #     self.assertRedirects(resp, '/accounts/login/?next=/questions/')
 
     def test_view_url_exists(self):
         self.login_user()
@@ -79,9 +79,9 @@ class QuestionViewTest(TestCase):
         self.assertTrue(login)
 
     # tests begin
-    def test_redirect_if_not_logged_in(self):
-        resp = self.client.get('/questions/1/')
-        self.assertRedirects(resp, '/accounts/login/?next=/questions/1/')
+    # def test_redirect_if_not_logged_in(self):
+    #     resp = self.client.get('/questions/1/')
+    #     self.assertRedirects(resp, '/accounts/login/?next=/questions/1/')
 
     def test_view_url_exists(self):
         self.login_user()
