@@ -29,7 +29,7 @@ from programming.codewof_utils import add_points, check_achievement_conditions
 QUESTION_JAVASCRIPT = 'js/question_types/{}.js'
 
 
-class QuestionListView(LoginRequiredMixin, generic.ListView):
+class QuestionListView(generic.ListView):
     """View for listing questions."""
 
     model = Question
@@ -54,7 +54,7 @@ class QuestionListView(LoginRequiredMixin, generic.ListView):
         return questions
 
 
-class QuestionView(LoginRequiredMixin, generic.DetailView):
+class QuestionView(generic.DetailView):
     """Displays a question.
 
     This view requires to retrieve the object first in the context,

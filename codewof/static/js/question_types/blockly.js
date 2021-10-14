@@ -89,16 +89,6 @@ function run_blockly_code(blocklyWorkspace, submit) {
     var user_code = Blockly.Python.workspaceToCode(blocklyWorkspace);
     
     test_cases = base.run_test_cases(test_cases, user_code, run_python_code);
-    if (submit) {
-        base.ajax_request(
-            'save_question_attempt',
-            {
-                user_input: user_code,
-                question: question_id,
-                test_cases: test_cases,
-            }
-        );
-    }
 }
 
 function run_python_code(user_code, test_case) {
