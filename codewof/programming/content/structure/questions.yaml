@@ -1,5 +1,7 @@
 say-hello:
-  type: program
+  types: 
+    - program
+    - blockly
   test-cases:
     1: normal
 
@@ -24,7 +26,9 @@ say-hello:
 #     2: normal
 
 add-10:
-  type: program
+  types: 
+    - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -65,8 +69,9 @@ countdown:
     3: exceptional
 
 repeated-add-10:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -96,16 +101,18 @@ ticket-calculator:
     5: normal
 
 rectangle-area:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
     3: normal
 
 where-is:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -143,6 +150,7 @@ greeting:
 string-concatenation:
   types:
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -162,8 +170,9 @@ bus-info:
     4: exceptional
 
 voting-age:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -288,7 +297,9 @@ find-highest-number:
     5: exceptional
 
 shutdown-machine:
-  type: program
+  types: 
+    - program
+    - blockly
   test-cases:
     1: exceptional
     2: exceptional
@@ -334,8 +345,9 @@ reverse-string:
     3: normal
 
 rotate-words:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -343,8 +355,9 @@ rotate-words:
     4: normal
 
 good-password:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: exceptional
     2: exceptional
@@ -400,8 +413,9 @@ total-under-10:
     4: normal
 
 go-tramping:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -411,8 +425,9 @@ go-tramping:
     6: exceptional
 
 make-even:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -436,8 +451,9 @@ print-score:
     4: normal
 
 h-words:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -510,8 +526,9 @@ evens-out:
     5: normal
 
 happy-birthday:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -520,8 +537,9 @@ happy-birthday:
     5: exceptional
 
 give-me-5:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: exceptional
@@ -583,8 +601,9 @@ roll-call:
     4: exceptional
 
 lunch:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -592,8 +611,9 @@ lunch:
     4: normal
 
 signature:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -753,8 +773,9 @@ sum-lucky-7:
     5: normal
 
 duck-goose:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -855,8 +876,9 @@ long-count:
     4: normal
 
 playing-card:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -864,22 +886,25 @@ playing-card:
     4: normal
 
 marco-polo:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
     3: normal
 
 say-kia-ora:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
 
 favourite-food:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
@@ -906,16 +931,18 @@ less-than-6:
     5: exceptional
 
 best-paper-scissors-rock:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal
     3: normal
 
 guessing-game:
-  types:
+  types: 
     - program
+    - blockly
   test-cases:
     1: normal
     2: normal

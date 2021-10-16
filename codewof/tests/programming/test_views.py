@@ -163,7 +163,7 @@ class CreateViewTest(TestCase):
                 {'name': 'Function', 'count': 1, 'unanswered_count': 1},
                 {'name': 'Parsons', 'count': 1, 'unanswered_count': 1},
                 {'name': 'Debugging', 'count': 1, 'unanswered_count': 1},
-
+                {'name': 'Blockly', 'count': 0, 'unanswered_count': 0},
             ]
         )
 
