@@ -437,7 +437,7 @@ function define_blocks(Blockly) {
     };
 
     Blockly.Python['variables_get'] = function(block) {
-        var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+        var variable_var = Blockly.Python.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
         var code = variable_var;
         return [code, Blockly.Python.ORDER_ATOMIC];
     };
@@ -458,7 +458,7 @@ function define_blocks(Blockly) {
     };
 
     Blockly.Python['variables_set'] = function(block) {
-        var variable_name = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+        var variable_name = Blockly.Python.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
         var text_text = block.getFieldValue('NAME');
         var value_name = Blockly.Python.valueToCode(block, 'varset', Blockly.Python.ORDER_ATOMIC);
         var code = variable_name + ' ' +text_text+ ' ' +value_name+ '\n';

@@ -127,7 +127,7 @@ function run_python_code(user_code, test_case) {
             }
         }
     } else {
-        test_case.received_output = 'No Python code provided.';
+        test_case.received_output = 'No Blockly code provided.';
         test_case.runtime_error = true;
     }
 }
